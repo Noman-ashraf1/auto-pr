@@ -1,12 +1,9 @@
-from __future__ import annotations
-
 from abc import ABC, abstractmethod
+
+from app.domain.entities.file_change import FileChange
 
 
 class GitHubService(ABC):
-    """
-    Interface for interacting with GitHub.
-    """
 
     @abstractmethod
     async def get_pull_request(
@@ -15,4 +12,13 @@ class GitHubService(ABC):
         repo: str,
         number: int,
     ) -> dict:
+        ...
+
+    @abstractmethod
+    async def get_pull_request_files(
+        self,
+        owner: str,
+        repo: str,
+        number: int,
+    ) -> list[FileChange]:
         ...
